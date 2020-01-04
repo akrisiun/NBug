@@ -11,7 +11,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using GitExtUtils.GitUI;
+// using GitExtUtils.GitUI;
 using NBug.Core.Reporting.Info;
 using NBug.Core.Util;
 using NBug.Core.Util.Serialization;
@@ -35,7 +35,7 @@ namespace NBug.Core.UI.WinForms
         internal Full()
         {
             InitializeComponent();
-            Icon = Resources.NBug_icon_16;
+            //Icon = Resources.NBug_icon_16;
             warningLabel.Text = Settings.Resources.UI_Dialog_Full_Message;
             generalTabPage.Text = Settings.Resources.UI_Dialog_Full_General_Tab;
             exceptionTabPage.Text = Settings.Resources.UI_Dialog_Full_Exception_Tab;
@@ -55,11 +55,11 @@ namespace NBug.Core.UI.WinForms
             _lastException = exception;
 
             // Scaling
-            sendAndQuitButton.Image = DpiUtil.Scale(Resources.Send);
-            btnCopy.Image = DpiUtil.Scale(Resources.CopyToClipboard);
-            exceptionTypeLabel.Image = DpiUtil.Scale(Resources.NBug_Icon_PNG_16);
-            exceptionDetails.InformationColumnWidth = DpiUtil.Scale(350);
-            exceptionDetails.PropertyColumnWidth = DpiUtil.Scale(101);
+            //sendAndQuitButton.Image = DpiUtil.Scale(Resources.Send);
+            //btnCopy.Image = DpiUtil.Scale(Resources.CopyToClipboard);
+            //exceptionTypeLabel.Image = DpiUtil.Scale(Resources.NBug_Icon_PNG_16);
+            //exceptionDetails.InformationColumnWidth = DpiUtil.Scale(350);
+            //exceptionDetails.PropertyColumnWidth = DpiUtil.Scale(101);
 
             // Fill in the 'General' tab
             warningPictureBox.Image = SystemIcons.Warning.ToBitmap();

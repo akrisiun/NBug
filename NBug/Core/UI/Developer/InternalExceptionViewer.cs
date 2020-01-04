@@ -20,7 +20,7 @@ namespace NBug.Core.UI.Developer
 		internal InternalExceptionViewer()
 		{
 			this.InitializeComponent();
-			this.Icon = Resources.NBug_icon_16;
+			//this.Icon = Resources.NBug_icon_16;
 			this.warningPictureBox.Image = SystemIcons.Warning.ToBitmap();
 		}
 

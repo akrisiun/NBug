@@ -69,7 +69,7 @@
 			// debugButton
 			// 
             this.debugButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.debugButton.Image = global::NBug.Properties.Resources.VS2010_16;
+			//this.debugButton.Image = global::NBug.Properties.Resources.VS2010_16;
 			this.debugButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.debugButton.Location = new System.Drawing.Point(364, 511);
 			this.debugButton.Name = "debugButton";
@@ -83,7 +83,7 @@
 			// 
             this.bugReportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.bugReportButton.Enabled = false;
-			this.bugReportButton.Image = global::NBug.Properties.Resources.Send;
+			//this.bugReportButton.Image = global::NBug.Properties.Resources.Send;
 			this.bugReportButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.bugReportButton.Location = new System.Drawing.Point(205, 511);
 			this.bugReportButton.Name = "bugReportButton";
@@ -120,7 +120,7 @@
 			// 
 			// documentationToolStripButton
 			// 
-			this.documentationToolStripButton.Image = global::NBug.Properties.Resources.Help_16;
+			//this.documentationToolStripButton.Image = global::NBug.Properties.Resources.Help_16;
 			this.documentationToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.documentationToolStripButton.Name = "documentationToolStripButton";
             this.documentationToolStripButton.Size = new System.Drawing.Size(148, 22);
@@ -135,7 +135,7 @@
 			// 
 			// forumToolStripLabel
 			// 
-			this.forumToolStripLabel.Image = global::NBug.Properties.Resources.Forum_16;
+			//this.forumToolStripLabel.Image = global::NBug.Properties.Resources.Forum_16;
 			this.forumToolStripLabel.IsLink = true;
 			this.forumToolStripLabel.Name = "forumToolStripLabel";
             this.forumToolStripLabel.Size = new System.Drawing.Size(117, 22);
@@ -150,7 +150,7 @@
 			// 
 			// trackerToolStripLabel
 			// 
-			this.trackerToolStripLabel.Image = global::NBug.Properties.Resources.Error_16;
+			//this.trackerToolStripLabel.Image = global::NBug.Properties.Resources.Error_16;
 			this.trackerToolStripLabel.IsLink = true;
 			this.trackerToolStripLabel.Name = "trackerToolStripLabel";
             this.trackerToolStripLabel.Size = new System.Drawing.Size(86, 22);

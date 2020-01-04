@@ -15,7 +15,7 @@ namespace NBug.Core.UI.WinForms
 		public Feedback()
 		{
 			this.InitializeComponent();
-			this.Icon = Resources.NBug_icon_16;
+			//this.Icon = Resources.NBug_icon_16;
 		}
 	}
 }

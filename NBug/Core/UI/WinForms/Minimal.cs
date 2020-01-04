@@ -9,17 +9,18 @@ using System.Configuration;
 namespace NBug.Core.UI.WinForms
 {
 	using System.Windows.Forms;
+    using global::NBug.Core.Reporting.Info;
 
-	using NBug.Core.Reporting.Info;
+    //using NBug.Core.Reporting.Info;
 
-	internal class Minimal
+    internal class Minimal
 	{
 		internal UIDialogResult ShowDialog(Report report)
 		{
 			MessageBox.Show(
 				new Form { TopMost = true }, 
 				Settings.Resources.UI_Dialog_Minimal_Message, 
-				report.GeneralInfo.HostApplication + " " + Properties.Localization.UI_Dialog_Minimal_Title, 
+				report.GeneralInfo.HostApplication + " " + "Title", // Properties.Localization.UI_Dialog_Minimal_Title, 
 				MessageBoxButtons.OK, 
 				MessageBoxIcon.Warning);
 

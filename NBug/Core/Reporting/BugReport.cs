@@ -9,16 +9,18 @@ namespace NBug.Core.Reporting
 	using System;
 	using System.IO;
 	using System.Xml.Serialization;
+    //using global::NBug.Core.Reporting.Info;
+    //using global::NBug.Core.Util.Logging;
+    //using global::NBug.Core.Util.Serialization;
+    using NBug.Core.UI;
+    using NBug.Core.Util;
+    using NBug.Core.Reporting.Info;
+    using NBug.Core.Reporting.MiniDump;
+    using NBug.Core.Util.Logging;
+    using NBug.Core.Util.Serialization;
+    using NBug.Core.Util.Storage;
 
-	using NBug.Core.Reporting.Info;
-	using NBug.Core.Reporting.MiniDump;
-	using NBug.Core.UI;
-	using NBug.Core.Util;
-	using NBug.Core.Util.Logging;
-	using NBug.Core.Util.Serialization;
-	using NBug.Core.Util.Storage;
-
-	internal class BugReport
+    internal class BugReport
 	{
 		/// <summary>
 		/// First parameters is the serializable exception object that is about to be processed, second parameter is any custom data
@@ -43,48 +45,49 @@ namespace NBug.Core.Reporting
 					handler(exception, report);
 				}
 
-				var uiDialogResult = UISelector.DisplayBugReportUI(exceptionThread, serializableException, report);
-				if (uiDialogResult.Report == SendReport.Send)
-				{
-					this.CreateReportZip(serializableException, report);
-				}
+                //var uiDialogResult = UISelector.DisplayBugReportUI(exceptionThread, serializableException, report);
+                //if (uiDialogResult.Report == SendReport.Send)
+                //{
+                //	this.CreateReportZip(serializableException, report);
+                //}
 
-				return uiDialogResult.Execution;
+                //return uiDialogResult.Execution;
 			}
 			catch (Exception ex)
 			{
 				Logger.Error("An exception occurred during bug report generation process. See the inner exception for details.", ex);
-				return ExecutionFlow.BreakExecution; // Since an internal exception occured
+				//return ExecutionFlow.BreakExecution; // Since an internal exception occured
 			}
+            return default(ExecutionFlow); //  uiDialogResult.Execution;
 		}
 
 		// ToDo: PRIORITY TASK! This code needs more testing & condensation
-		private void AddAdditionalFiles(ZipStorer zipStorer)
+		private void AddAdditionalFiles(object zip) // ZipStorer zipStorer)
 		{
-			foreach (var mask in Settings.AdditionalReportFiles)
-			{
-				// Join before spliting because the mask may have some folders inside it
-				var fullPath = Path.Combine(Settings.NBugDirectory, mask);
-				var dir = Path.GetDirectoryName(fullPath);
-				var file = Path.GetFileName(fullPath);
+			//foreach (var mask in Settings.AdditionalReportFiles)
+			//{
+			//	// Join before spliting because the mask may have some folders inside it
+			//	var fullPath = Path.Combine(Settings.NBugDirectory, mask);
+			//	var dir = Path.GetDirectoryName(fullPath);
+			//	var file = Path.GetFileName(fullPath);
 
-				if (!Directory.Exists(dir))
-				{
-					continue;
-				}
+			//	if (!Directory.Exists(dir))
+			//	{
+			//		continue;
+			//	}
 
-				if (file.Contains("*") || file.Contains("?"))
-				{
-					foreach (var item in Directory.GetFiles(dir, file))
-					{
-						this.AddToZip(zipStorer, Settings.NBugDirectory, item);
-					}
-				}
-				else
-				{
-					this.AddToZip(zipStorer, Settings.NBugDirectory, fullPath);
-				}
-			}
+			//	if (file.Contains("*") || file.Contains("?"))
+			//	{
+			//		foreach (var item in Directory.GetFiles(dir, file))
+			//		{
+			//			this.AddToZip(zipStorer, Settings.NBugDirectory, item);
+			//		}
+			//	}
+			//	else
+			//	{
+			//		this.AddToZip(zipStorer, Settings.NBugDirectory, fullPath);
+			//	}
+			//}
 		}
 
 		// ToDo: PRIORITY TASK! This code needs more testing & condensation
@@ -131,62 +134,62 @@ namespace NBug.Core.Reporting
 			    || File.GetLastWriteTime(Settings.EntryAssembly.Location).AddDays(Settings.StopReportingAfter).CompareTo(DateTime.Now) > 0)
 			{
 				// Test if there is already more than enough queued report files
-				if (Settings.MaxQueuedReports < 0 || Storer.GetReportCount() < Settings.MaxQueuedReports)
+				if (Settings.MaxQueuedReports < 0) // || Storer.GetReportCount() < Settings.MaxQueuedReports)
 				{
 					var reportFileName = "Exception_" + DateTime.UtcNow.ToFileTime() + ".zip";
 					var minidumpFilePath = Path.Combine(
 						Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Exception_MiniDump_" + DateTime.UtcNow.ToFileTime() + ".mdmp");
 
-					using (var storer = new Storer())
-					using (var zipStorer = ZipStorer.Create(storer.CreateReportFile(reportFileName), string.Empty))
-					using (var stream = new MemoryStream())
-					{
-						// Store the exception
-						var serializer = new XmlSerializer(typeof(SerializableException));
-						serializer.Serialize(stream, serializableException);
-						stream.Position = 0;
-						zipStorer.AddStream(ZipStorer.Compression.Deflate, StoredItemFile.Exception, stream, DateTime.UtcNow, string.Empty);
+					//using (var storer = new Storer())
+					//using (var zipStorer = ZipStorer.Create(storer.CreateReportFile(reportFileName), string.Empty))
+					//using (var stream = new MemoryStream())
+					//{
+					//	// Store the exception
+					//	var serializer = new XmlSerializer(typeof(SerializableException));
+					//	serializer.Serialize(stream, serializableException);
+					//	stream.Position = 0;
+					//	zipStorer.AddStream(ZipStorer.Compression.Deflate, StoredItemFile.Exception, stream, DateTime.UtcNow, string.Empty);
 
-						// Store the report
-						stream.SetLength(0);
+					//	// Store the report
+					//	stream.SetLength(0);
 
-						try
-						{
-							serializer = report.CustomInfo != null
-								             ? new XmlSerializer(typeof(Report), new[] { report.CustomInfo.GetType() })
-								             : new XmlSerializer(typeof(Report));
+					//	try
+					//	{
+					//		serializer = report.CustomInfo != null
+					//			             ? new XmlSerializer(typeof(Report), new[] { report.CustomInfo.GetType() })
+					//			             : new XmlSerializer(typeof(Report));
 
-							serializer.Serialize(stream, report);
-						}
-						catch (Exception exception)
-						{
-							Logger.Error(
-								string.Format(
-									"The given custom info of type [{0}] cannot be serialized. Make sure that given type and inner types are XML serializable.", 
-									report.CustomInfo.GetType()), 
-								exception);
-							report.CustomInfo = null;
-							serializer = new XmlSerializer(typeof(Report));
-							serializer.Serialize(stream, report);
-						}
+					//		serializer.Serialize(stream, report);
+					//	}
+					//	catch (Exception exception)
+					//	{
+					//		Logger.Error(
+					//			string.Format(
+					//				"The given custom info of type [{0}] cannot be serialized. Make sure that given type and inner types are XML serializable.", 
+					//				report.CustomInfo.GetType()), 
+					//			exception);
+					//		report.CustomInfo = null;
+					//		serializer = new XmlSerializer(typeof(Report));
+					//		serializer.Serialize(stream, report);
+					//	}
 
-						stream.Position = 0;
-						zipStorer.AddStream(ZipStorer.Compression.Deflate, StoredItemFile.Report, stream, DateTime.UtcNow, string.Empty);
+					//	stream.Position = 0;
+					//	zipStorer.AddStream(ZipStorer.Compression.Deflate, StoredItemFile.Report, stream, DateTime.UtcNow, string.Empty);
 
-						// Add the memory minidump to the report file (only if configured so)
-						if (DumpWriter.Write(minidumpFilePath))
-						{
-							zipStorer.AddFile(ZipStorer.Compression.Deflate, minidumpFilePath, StoredItemFile.MiniDump, string.Empty);
-							File.Delete(minidumpFilePath);
-						}
+					//	// Add the memory minidump to the report file (only if configured so)
+					//	if (DumpWriter.Write(minidumpFilePath))
+					//	{
+					//		zipStorer.AddFile(ZipStorer.Compression.Deflate, minidumpFilePath, StoredItemFile.MiniDump, string.Empty);
+					//		File.Delete(minidumpFilePath);
+					//	}
 
-						// Add any user supplied files in the report (if any)
-						if (Settings.AdditionalReportFiles.Count != 0)
-						{
-							// ToDo: This needs a lot more work!
-							this.AddAdditionalFiles(zipStorer);
-						}
-					}
+					//	// Add any user supplied files in the report (if any)
+					//	if (Settings.AdditionalReportFiles.Count != 0)
+					//	{
+					//		// ToDo: This needs a lot more work!
+					//		this.AddAdditionalFiles(zipStorer);
+					//	}
+					//}
 
 					Logger.Trace("Created a new report file. Currently the number of report files queued to be send is: " + Storer.GetReportCount());
 				}
@@ -204,13 +207,13 @@ namespace NBug.Core.Reporting
 					+ ")', bug reporting feature was enabled for a certain amount of time which has now expired: Bug reporting is now disabled.");
 
 				// ToDo: Completely eliminate this with SettingsOverride.DisableReporting = true; since enumerating filesystem adds overhead);
-				if (Storer.GetReportCount() > 0)
-				{
-					Logger.Trace(
-						"As per setting 'Settings.StopReportingAfter(" + Settings.StopReportingAfter
-						+ ")', bug reporting feature was enabled for a certain amount of time which has now expired: Truncating all expired bug reports.");
-					Storer.TruncateReportFiles(0);
-				}
+				//if (Storer.GetReportCount() > 0)
+				//{
+				//	Logger.Trace(
+				//		"As per setting 'Settings.StopReportingAfter(" + Settings.StopReportingAfter
+				//		+ ")', bug reporting feature was enabled for a certain amount of time which has now expired: Truncating all expired bug reports.");
+				//	Storer.TruncateReportFiles(0);
+				//}
 			}
 		}
 

@@ -113,7 +113,7 @@
 			// 
 			// feedbackPictureBox
 			// 
-			this.feedbackPictureBox.Image = global::NBug.Properties.Resources.Feedback;
+			//this.feedbackPictureBox.Image = global::NBug.Properties.Resources.Feedback;
 			this.feedbackPictureBox.Location = new System.Drawing.Point(12, 12);
 			this.feedbackPictureBox.Name = "feedbackPictureBox";
 			this.feedbackPictureBox.Size = new System.Drawing.Size(32, 32);
@@ -156,7 +156,7 @@
 			// 
 			// sendButton
 			// 
-			this.sendButton.Image = global::NBug.Properties.Resources.Send;
+			//this.sendButton.Image = global::NBug.Properties.Resources.Send;
 			this.sendButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.sendButton.Location = new System.Drawing.Point(319, 284);
 			this.sendButton.Name = "sendButton";

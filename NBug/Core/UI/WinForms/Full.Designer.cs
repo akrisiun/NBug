@@ -1,6 +1,8 @@
 ﻿namespace NBug.Core.UI.WinForms
 {
 	using NBug.Core.UI.WinForms.Panels;
+    using NBug.Properties;
+    //using NBug.Properties.Resources;
 
 	partial class Full
 	{
@@ -117,7 +119,7 @@
             // 
             // sendAndQuitButton
             // 
-            this.sendAndQuitButton.Image = global::NBug.Properties.Resources.Send;
+            //this.sendAndQuitButton.Image = global::NBug.Properties.Resources.Send;
             this.sendAndQuitButton.Location = new System.Drawing.Point(252, 322);
             this.sendAndQuitButton.Name = "sendAndQuitButton";
             this.sendAndQuitButton.Size = new System.Drawing.Size(118, 24);
@@ -141,7 +143,7 @@
             // 
             // btnCopy
             // 
-            this.btnCopy.Image = global::NBug.Properties.Resources.CopyToClipboard;
+            //this.btnCopy.Image = global::NBug.Properties.Resources.CopyToClipboard;
             this.btnCopy.Location = new System.Drawing.Point(13, 322);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(75, 24);
@@ -161,7 +163,7 @@
             // 
             // exceptionTypeLabel
             // 
-            this.exceptionTypeLabel.Image = global::NBug.Properties.Resources.NBug_Icon_PNG_16;
+            //this.exceptionTypeLabel.Image = global::NBug.Properties.Resources.NBug_Icon_PNG_16;
             this.exceptionTypeLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.exceptionTypeLabel.Location = new System.Drawing.Point(21, 66);
             this.exceptionTypeLabel.Name = "exceptionTypeLabel";

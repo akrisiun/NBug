@@ -22,7 +22,7 @@ namespace NBug.Core.UI.WinForms
 		internal Normal()
 		{
 			this.InitializeComponent();
-			this.Icon = Resources.NBug_icon_16;
+			//this.Icon = Resources.NBug_icon_16;
 			this.warningPictureBox.Image = SystemIcons.Warning.ToBitmap();
 			this.warningLabel.Text = Settings.Resources.UI_Dialog_Normal_Message;
 			this.continueButton.Text = Settings.Resources.UI_Dialog_Normal_Continue_Button;

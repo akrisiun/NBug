@@ -14,6 +14,7 @@ namespace NBug.Core.UI.Developer
 	using Microsoft.VisualStudio.Threading;
 	using NBug.Enums;
 	using NBug.Properties;
+    //using NBug.Properties.Resources;
 
 	internal partial class InternalLogViewer : Form
 	{
